@@ -31,13 +31,16 @@ size_t binary_tree_height(const binary_tree_t *tree)
  */
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
+	int left_height;
+	int right_height;
+
 	/* If tree does not exist height is 0 */
 	if (tree == NULL)
 		return (0);
 
 	/* Recursively find the height for each subtree */
-	int left_height = binary_tree_height(tree->left);
-	int right_height = binary_tree_height(tree->right);
+	left_height = (int)binary_tree_height(tree->left);
+	right_height = (int)binary_tree_height(tree->right);
 
 	/* Check if the left and right subtrees have the same height */
 	if (left_height == right_height)
