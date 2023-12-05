@@ -11,22 +11,19 @@
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 	const binary_tree_t *second)
 {
-	size_t count1, i;
+	size_t count1 = 0, i;
+	binary_tree_t *ancestor1, *ancestor2;
+	binary_tree_t *visited_set1[1024] = {NULL};	/* To store visited ancestor */
 
 	if (first == NULL || second == NULL)
 		return (NULL);
 
 	/* Get ancestors for each node */
-	binary_tree_t *ancestor1 = (binary_tree_t *)first;
-	binary_tree_t *ancestor2 = (binary_tree_t *)second;
-
-	/* Create array to store visited ancestor */
-	binary_tree_t *visited_set1[1024] = {NULL};
-
-	count1 = 0;
+	ancestor1 = (binary_tree_t *)first;
+	ancestor2 = (binary_tree_t *)second;
 
 	/* Traverse from the first node to the root and save the visited ancestors */
-	while (ancestor1  != NULL)
+	while (ancestor1 != NULL)
 	{
 		visited_set1[count1++] = ancestor1;
 		ancestor1 = ancestor1->parent;
@@ -43,7 +40,6 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 		{
 			if (ancestor2 == visited_set1[i])
 				return (ancestor2);
-
 		}
 		ancestor2 = ancestor2->parent;
 	}
